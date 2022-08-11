@@ -19,7 +19,7 @@ def main():  # driver function
             legend[key] = value
         print(legend)
         public_key = input("\nEnter the public key: ").split()  # public key list
-        while len(public_key) != 2:  # ensuring proper length of public key (n, e) in entered
+        while len(public_key) != 2:  # ensuring proper length of public key (n, e) entered
             print("Invalid public key, try again")
             public_key = input("\nEnter the public key: ").split()
         code_block = input("Enter the encrypted code: ").split()  # code block list
