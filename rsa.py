@@ -5,7 +5,7 @@ from math import gcd  # gcd used for Euler Totient function
 from sympy import mod_inverse as minv  # minv to find private key, the inverse of e modulo phi
 
 
-def main():  # driver function
+def rsa():  # driver function
     option = input("Press <enter> to continue or q to quit: ")
     while option != 'q':  # while loop used for 'infinite' user entries
         card = int(input("\nHow many items are in your legend? "))
@@ -73,4 +73,4 @@ def decrypt(code_block, private_key, public_key, legend):
 
 
 if __name__ == '__main__':  # special variable __name__
-    main()  # call to main
+    rsa()  # call to main
