@@ -73,4 +73,4 @@ def decrypt(code_block, private_key, public_key, legend):
 
 
 if __name__ == '__main__':  # special variable __name__
-    rsa()  # call to main
+    rsa()  # call to rsa
