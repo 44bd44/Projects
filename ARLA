@@ -1,0 +1,84 @@
+from sympy import randprime, divisors, mobius, mod_inverse
+from math import gcd
+from random import randint
+
+p = randprime(100000000, 1000000000)
+print(f"p = {p}")
+
+phi = 0
+for i in range(p):
+   if gcd(i, p) == 1:
+       phi += 1
+print(f"phi(p) = {phi}")
+
+q = randprime(1000, 10000)
+print(f"q = {q}")
+
+g = randint(1000, 10000)
+print(f"g = {g}")
+D = divisors(g)
+print(f"D = {D}")
+
+MD = []
+for i in range(len(D)):
+   mu = mobius(D[i])
+   MD.append(mu)
+print(f"MD = {MD}")
+
+r = randint(1000000, 10000000)
+print(f"r = {r}")
+s = randint(1000000, 10000000)
+print(f"s = {s}")
+
+N = []
+for i in range(len(D)):
+   n = int((MD[i] * (q ** (g / D[i]))) / g)
+   N.append(n)
+print(f"N = {N}")
+
+Ngq = sum(N)
+print(f"Ngq = {Ngq}")
+
+R = (Ngq ** (r ** r)) % p
+print(f"R = {R}")
+S = (Ngq ** (s ** s)) % p
+print(f"S = {S}")
+
+Kr = (S ** (r ** r)) % p
+Ks = (R ** (s ** s)) % p
+print(f"Kr = {Kr}")
+print(f"Ks = {Ks}")
+
+while gcd(Kr, phi) != 1:
+   Kr += 1
+print(f"b = {Kr}")
+while gcd(Ks, phi) != 1:
+   Ks += 1
+print(f"b = {Ks}")
+
+a = mod_inverse(Ks, phi)
+print(f"a = {a}")
+
+num = randint(4, 8)
+print(f"num = {num}")
+M = []
+for i in range(num):
+   M.append(randint(1000000, 10000000))
+print(f"M = {M}")
+
+C = []
+for i in range(len(M)):
+   c = (M[i] ** a) % p
+   C.append(c)
+print(f"C = {C}")
+
+Dc = []
+for i in range(len(C)):
+   m = (C[i] ** Kr) % p
+   Dc.append(m)
+print(f"Dc = {Dc}")
+
+if M == Dc:
+   print("SUCCESS")
+else:
+   print("FAILURE")
