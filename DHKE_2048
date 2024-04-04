@@ -1,0 +1,20 @@
+# This program allows the user to visualize the random generation of a 2048-bit Diffie-Hellman Key Exchange
+
+import sympy as sp
+from random import randint as rd
+
+p = sp.randprime(pow(2, 2047), pow(2, 2048))
+g = rd(pow(2, 2047), pow(2, 2048))
+r = rd(pow(2, 511), pow(2, 1024))
+s = rd(pow(2, 511), pow(2, 1024))
+
+R = pow(g, r, p)
+S = pow(g, s, p)
+
+Kr = pow(S, r, p)
+Ks = pow(R, s, p)
+
+print(f'p: {p}\ng: {g}\nr: {r}\ns: {s}\nR: {R}\nS: {S}\n')
+
+if Kr == Ks:
+    print(f'Kr: {Kr}\nKs: {Ks}')
