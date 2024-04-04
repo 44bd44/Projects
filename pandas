@@ -1,0 +1,18 @@
+# This program covers a standard cleaning and visualization of data in a .csv file
+
+import pandas as pd
+from matplotlib import pyplot as pl
+
+df = pd.read_csv(r'C:\Users\blake\Downloads\newdata.csv')
+df.drop_duplicates(inplace=True)
+df['Duration'].loc[7] = 45
+df['Date'].fillna('12/22/2020', inplace=True)
+df['Date'] = pd.to_datetime(df['Date'])
+print(df['Pulse'].median())
+df['Calories'].fillna(df['Calories'].mean(), inplace=True)
+
+print(df.to_string())
+
+"""df.plot(kind='scatter', x='Duration', y='Calories', color='y')
+df['Maxpulse'].plot(kind='hist', color='b')"""
+pl.show()
