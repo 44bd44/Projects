@@ -1,0 +1,56 @@
+# This Program allows the user to generate a diagonalizable matrix and compute the Eigenspace over a Galois Field
+
+import sympy
+
+p = int(input('p: '))
+a = int(input('a: '))
+b = int(input('b: '))
+c = int(input('c: '))
+d = int(input('d: '))
+e = int(input('e: '))
+f = int(input('f: '))
+g = int(input('g: '))
+h = int(input('h: '))
+i = int(input('i: '))
+j = int(input('j: '))
+
+G_11 = ((a * e * g) + (b * f * i)) % p
+G_12 = ((a * e * h) + (b * f * j)) % p
+G_21 = ((c * e * g) + (d * f * i)) % p
+G_22 = ((c * e * h) + (d * f * j)) % p
+
+print(f'\n{G_11}\t{G_12}\n{G_21}\t{G_22}')
+
+x = (-1 * (G_11 + G_22)) % p
+det = ((G_11 * G_22) - (G_21 * G_12)) % p
+print(f'\nPolynomial: x^2 + {x}x + {det}')
+for i in range(p):
+    for j in range(p):
+        if (i * j) % p == det and (i + j) % p == x:
+            print(f'Polynomial: (x+{i})(x+{j})')
+
+l1_inv = int(input('l1_inv: '))
+l2_inv = int(input('l2_inv: '))
+l1 = (-1 * l1_inv) % p
+l2 = (-1 * l2_inv) % p
+
+G_11_l1 = (G_11 - l1) % p
+G_11_l2 = (G_11 - l2) % p
+G_11_inv1 = sympy.mod_inverse(G_11_l1, p)
+G_11_inv2 = sympy.mod_inverse(G_11_l2, p)
+
+G_12_1 = (G_12 * G_11_inv1) % p
+G_12_2 = (G_12 * G_11_inv2) % p
+G_12_1_inv = (-1 * G_12_1) % p
+G_12_2_inv = (-1 * G_12_2) % p
+
+print(f'\n{G_12_1_inv}\t{G_12_2_inv}\n1\t1')
+print(f'\n{l1}\t0\n0\t{l2}')
+
+for i in range(p):
+    for j in range(p):
+        for k in range(p):
+            for m in range(p):
+                if ((G_12_1_inv * i) + (G_12_2_inv * k)) % p == 1 and ((G_12_1_inv * j) + (G_12_2_inv * m)) % p == 0 and \
+                        (i + k) % p == 0 and (j + m) % p == 1:
+                    print(f'\n{i}\t{j}\n{k}\t{m}')
