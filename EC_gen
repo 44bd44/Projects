@@ -1,0 +1,16 @@
+# This program allows the user to visualize a random elliptic curve generated over a Galois Field
+
+import sympy as sp
+from random import randint as rd
+from matplotlib import pyplot as pl
+
+p = sp.randprime(pow(2, 5), pow(2, 6))
+a = rd(pow(2, 3), pow(2, 5))
+b = rd(pow(2, 3), pow(2, 5))
+
+for i in range(p):
+    for j in range(p):
+        if (pow(j, 2) - pow(i, 3) - (a * i) - b) % p == 0:
+            pl.scatter(x=i, y=j, color='b')
+pl.title(f'y = x^3 + {a}x + {b} over GF({p})')
+pl.show()
